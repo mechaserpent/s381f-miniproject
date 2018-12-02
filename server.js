@@ -7,7 +7,7 @@ app = express();
 app.set('view engine', 'ejs');
 
 var SECRETKEY1 = 'I want to pass COMPS381F';
-var SECRETKEY2 = 'Hello';
+var SECRETKEY2 = 'Keep this to yourself';
 
 
 // mongodb
@@ -23,8 +23,7 @@ app.set('view engine', 'ejs');
 
 app.use(session({
 	name: 'session',
-	keys: [SECRETKEY1, SECRETKEY2]	
-	maxAge: 5 * 1000 // 5secs
+	keys: [SECRETKEY1, SECRETKEY2]
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
