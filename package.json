@@ -1,0 +1,18 @@
+{
+    "name": "s381f-miniproject",
+    "description": "COMPS381F Group Project",
+    "author": "Maverick",
+    "version": "0.0.1",
+    "dependencies": {
+        "express": "*",
+        "ejs": "*",
+        "body-parser": "*",
+        "cookie-session": "*",
+        "mongodb": "3.0.15",
+        "formidable": "latest"
+    },
+    "engine": "node >= 0.10.0",
+    "scripts": {
+        "start": "node server"
+    }
+}

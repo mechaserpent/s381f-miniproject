@@ -1,0 +1,38 @@
+<html>   
+<title>Home</title>
+   </head>
+   <body>
+	<H1>Welcome back,</H1>
+	<p>User:<%= name %></p>
+	
+<br>
+ <a href="/create"><button type="submit" form="details" value="Create">Create Restaurant</button></a>
+      <br /><br />Search : <br /><form method="GET" action="/search">
+       <input type="text" name="id">
+	<select name="type">
+    <option value="name">Name</option>
+    <option value="borough">Borough</option>
+    <option value="cuisine">Cuisine</option>
+  </select>
+ <button type="submit" value="Search">Search</button>
+      
+      </form>
+      <br />
+      <ol>
+      <% for (let i = 0; i < result_arr.length; i++) 
+	{
+	%>         
+	<li>
+		<a href="/view?id=<%= result_arr[i]._id %>">
+		<%= result_arr[i].name %>
+		</a>
+	</li>         
+	<%
+	}
+	%>
+	</ol>
+
+      <br />
+      <a href="/logout" >Logout</a>
+   </body>
+</html>

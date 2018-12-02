@@ -1,0 +1,38 @@
+<html>
+<title>Update Restaurant</title></head>
+   <body>
+      <h1>Update Restaurant</h1>
+      
+      <form id='details' method='POST' action='/update' enctype="multipart/form-data">    
+	Restaurant ID: <br><input type="text" name="restaurantid" value="<%= result[0].restaurantid %>"><br>
+	Name: <br><input type="text" name="name" value="<%= result[0].name %>"><br>
+	Borough: <br><input type="text" name="borough" value="<%= result[0].borough %>"><br>
+	Cuisine: <br><input type="text" name="cuisine" value="<%= result[0].cuisine %>"><br>
+
+	<h4>ADDRESS:<br></h4>
+	Building: <br><input type="text" name="building" value="<%= result[0].address.building %>"><br>
+	Street: <br><input type="text" name="street" value="<%= result[0].address.street %>"><br>
+	Zipcode: <br><input type="text" name="zipcode" value="<%= result[0].address.zipcode %>"><br>
+
+	<h4>GPS Location:<br></h4>
+	GPS Coordinates(lat.): <br><input type="text" name="lat" value="<%= lat %>"><br>
+	GPS Coordinates(lon.): <br><input type="text" name="lon" value="<%= lon %>"><br>
+
+
+	<% if (result[0].photo != '') { %>
+	Photo: <br><img src="data:<%=result[0].photo_mimetype%>;base64, <%=result[0].photo%>"><br>
+	Photo mimetype: <%= result[0].photo_mimetype %><br>
+         <input type="hidden" name="photo" value="<%= result[0].photo %>"><br>
+         <input type="hidden" name="photo_mimetype" value="<%= result[0].photo_mimetype %>"><br>
+      <% } %> 
+	New Photo: <br><input type="file" name="filetoupload" ><br>
+	
+	<input type="hidden" name="id" value="<%= id %>">
+	</form>
+	<script>
+	function goBack() {window.history.back();}
+	</script>
+	<button type="submit" form="details" value="Update">Update</button>
+	<button onclick="goBack()" >Go Back</button>
+   </body>
+</html>

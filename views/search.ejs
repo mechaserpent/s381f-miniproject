@@ -1,0 +1,19 @@
+<html>
+<title>Search a retaurant</title></head>
+   <body>
+       <H1>Searching Result:</H1> 
+      <br />
+      <ol>
+      <% for (let i = 0; i < result.length; i++) { %>
+         
+         <li><a href="/view?id=<%= result[i]._id %>"><%= result[i].name %></a></li>
+         
+      <% }%></ol>
+      <br />
+      	<script>
+	function goBack() {window.history.back();}
+	</script>
+      <button onclick="goBack()" >Go Back</button>
+      
+   </body>
+</html>

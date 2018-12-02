@@ -1,0 +1,35 @@
+<html>
+<title>Create New Restaurant</title></head>
+   <body>
+      <H1>Create Restaurant</H1><br/>
+      <form id="details" method="post" action="/create" enctype="multipart/form-data" >
+		
+  	Restaurant ID: <br><input type="text" name="restaurantid"><br>
+  	Name: <br><input type="text"  name="name" ><br>
+	Borough: <br><input type="text" name="borough" ><br>
+	Cuisine: <br><input type="text" name="cuisine" ><br>
+	
+	<h4>ADDRESS:<br></h4>
+	Building: <br><input type="text" name="building" ><br>
+	Street: <br><input type="text" name="street" ><br>
+	Zipcode: <br><input type="text" name="zipcode" ><br>
+	
+	<h4>GPS Location:<br></h4>
+	GPS Coordinates(Latitude.):<br><input type="text" name="lat" > <br>
+	GPS Coordinates(Longitude.):<br><input type="text" name="lon" ><br>
+	Photo: <br><input type="file"  name="filetoupload"><br>
+	<!-- Photo mimetype: <input type="text" name="photo_mimetype" ><br> -->
+	
+<br>
+ 	Owner: <br><%= name %><input type="hidden" name="owner" value="<%= name %>" >
+<br>
+	
+	</form>
+	<script>
+	function goBack() {window.history.back();}
+	</script>
+	<h1><button type="submit" form="details" value="Create">Sumbit</button></h1>      
+	<button onclick="goBack()">Go Back</button>
+
+   </body>
+</html>

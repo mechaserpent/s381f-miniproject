@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+   <meta charset="utf-8">
+     <title>View Restaurant</title>
+	<style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+
+    </style>
+ </head>
+
+   <body>
+	<H1> <%= result[0].name %></H1>
+        <% if (result[0].photo != '') { %>
+         <img src="data:<%=result[0].photo_mimetype%>;base64, <%=result[0].photo%>">
+      <% } %>
+      <br />
+	</br>&nbsp;&nbsp;Borough: <%= result[0].borough %><br>
+	</br>&nbsp;&nbsp;Cuisine: <%= result[0].cuisine %><br>
+	
+
+	</br>&nbsp;&nbsp;Address:</br>
+
+	<br>&nbsp;&nbsp;Building: <%= result[0].address.building %><br>
+	<br>&nbsp;&nbsp;Street: <%= result[0].address.street %><br>
+	<br>&nbsp;&nbsp;Zipcode: <%= result[0].address.zipcode %><br>
+
+	<br>&nbsp;&nbsp;GPS:&nbsp;&nbsp;
+	[<%= result[0].address.coord %>]<br>
+	<br>&nbsp;&nbsp;Rating
+	<% for (let i = 0; i < result[0].grades.length; i++) {%>
+ 
+	<ol>
+	<%=i+1%>.&nbsp;<%= result[0].grades[i].score %>&nbsp;&nbsp;(<%= result[0].grades[i].user %>)
+	</ol>	
+	<% } %>
+
+ <br /><form method="post" action="/rate">
+             Score ( 1 - 10 ) : 
+               <input type="hidden" name="user" value="<%= name %>">
+        <input type="hidden" name="id" value="<%= result[0]._id %>">
+        
+  <input type="text" name="score" >
+  <button type="submit" value="Rate">Rate</button>
+
+        <br />
+	<br>Created by: <%= result[0].owner %><br />
+
+<div id="map"></div>
+      <% if (result[0].address.coord != null || result[0].address.coord != undefined) { %>
+         <br>
+      <% } %>
+
+     <script>
+// Initialize and add the map
+	function initMap() {
+
+// The location of this restaurant
+        var myLatLng = {lat: <%= result[0].address.coord[0] %>, lng: <%= result[0].address.coord[1] %>};
+
+// The map, centered at myLatLng
+	var map = new google.maps.Map(document.getElementById('map'),  {zoom: 20, center: myLatLng});
+
+// The marker, positioned at myLatLng
+  var marker = new google.maps.Marker({position: myLatLng, map: map, title: '<%= result[0].name %>'});
+}
+
+ </script> 
+<!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=
+AIzaSyAPolNq7pFNb11D66s8Yrl9PrU43hDTsU4&callback=initMap">
+    </script>
+
+
+	<br />
+      <% if (name == result[0].owner) { %>
+        <a href="/update?id=<%= result[0]._id %>"><button type="submit" form="details">Edit</button></a>
+	
+	       <form method="post" action="/delete">
+          <input type="hidden" name="id" value="<%= result[0]._id %>">
+          <button type="submit" value="Delete">Delete</button>
+        </form>
+        <% } %>
+           
+     </form>
+      <br />
+	<a href="/"> Go Back to Home Page</a>
+	<br /><br />
+  </body>
+</html>
